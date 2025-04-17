@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        body {
+            font-size: large;
+            text-align: center;
+        }
+        table {
+            margin: auto; 
+            margin-top: 50px; 
+        }
+       
+
+        td,
+        input,
+        select {
+            padding: 7px;
+            text-align: center;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: #448AFF;
+            padding: 10px;
+            border-style: none;
+            color: aliceblue;
+            border-radius: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form id="studentForm" style="text-align: center;">
+            <table border="1">
+                <thead>
+                    <h1 style="text-align: center;">STUDENT FORM</h1>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" placeholder="Enter your name" id="name" required></td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td><input type="number" placeholder="Enter your age" id="age" required></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>
+                            <input type="radio" name="gender" value="Male" required>Male
+                            <input type="radio" name="gender" value="Female">Female
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Course</td>
+                        <td>
+                            <select name="Course" style="width: 100%;" id="course" required>
+                                <option>Javascript</option>
+                                <option>Python</option>
+                                <option>C</option>
+                                <option>C++</option>
+                                <option>SQL</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" placeholder="example@gmail.com" id="email" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"> <button class="btn" type="submit">SAVE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div>
+        <form id="studentinfo">
+            <table border="1" id="studentTable">
+                <tr>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Course</td>
+                    <td>Gender</td>
+                    <td>Email</td>
+                    <td>Action</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        var form = document.getElementById("studentForm");
+        var studentTable = document.getElementById("studentTable");
+
+        // Add Event Listener for Form Submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Retrieve Form Input Values
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const course = document.getElementById('course').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const email = document.getElementById('email').value;
+
+            // Adding new rows into table
+            const newRow = studentTable.insertRow();
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>${age}</td>
+                <td>${course}</td>
+                <td>${gender}</td>
+                <td>${email}</td>
+                <td><button onclick="deleteRow(this)">Delete</button></td>
+            `;
+
+            // Reset the Form
+            form.reset();
+        });
+
+        // Delete Row Function
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+
+</html>
